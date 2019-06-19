@@ -51,7 +51,7 @@ Constraints
 
 ## Examples
 
-** Example 1 **
+**Example 1**
 
 {3, 4}
 
@@ -65,7 +65,7 @@ Returns: { 1,  0,  1,  0,  0,  1,  1,  0 }
 
 This is a simple menu, with only two selections. We see each of the simplest diet plans here.
 
-** Example 2 **
+**Example 2**
 
 {3, 4, 1, 5}
 
@@ -79,7 +79,7 @@ Returns: { 3,  2,  0 }
 
 Note here that lowest total calories is tied between items 2 and 3. Note also that both of those items are tied for fat content. So, when we have lowest carbs as a tie-breaker, item 3 is selected. When there is no further tiebreaker, we select the one with lowest index. Note also that if highest fat is the first requirement, then the tiebreaker is irrelevant since item 0 has more fat than items 2 or 3.
 
-** Example 3 **
+**Example 3**
 
 {18, 86, 76,  0, 34, 30, 95, 12, 21}
 
