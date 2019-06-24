@@ -30,8 +30,8 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
             var indices = new List<int>();
             for (int j = 0; j < protein.Length; j++) indices.Add(j);
             int max, min;
-                foreach (char ch in dietPlan) {
-                    switch(ch) {
+                foreach (char nutrient in dietPlan) {
+                    switch(nutrient) {
                         case 'P':
                             max = FindMax(protein, indices);
                             indices = FindRequiredIndices(protein, indices, max);
