@@ -69,38 +69,29 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
             return indices[0];
         }
 
-         public static List<int> FindRequiredIndices(int[] arr, List<int> indices_, int element) {
+         public static List<int> FindRequiredIndices(int[] arr, List<int> indicesArg, int element) {
             List<int> indices = new List<int>();
-
-            foreach (int i in indices_) {
+            foreach (int i in indicesArg) {
                 if (arr[i] == element) indices.Add(i);
             }
-
             return indices;
         }
 
         public static int FindMax(int[] arr, List<int> indices) {
             if (indices.Count == 1) return arr[indices[0]];
-
             int max = arr[indices[0]];
-
             for (int i = 1; i < indices.Count; i++) {
                 if (arr[indices[i]] > max) max = arr[indices[i]];
             }
-
             return max;
         }
         public static int FindMin(int[] arr, List<int> indices) {
             if (indices.Count == 1) return arr[indices[0]];
-
             int min = arr[indices[0]];
-
             for (int i = 1; i < indices.Count; i++) {
                 if (arr[indices[i]] < min) min = arr[indices[i]];
             }
-
             return min;
         }
     }
-
 }
