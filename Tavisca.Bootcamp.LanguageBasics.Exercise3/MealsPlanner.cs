@@ -29,69 +29,66 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
         {
             var indices = new List<int>();
             for (int j = 0; j < protein.Length; j++) indices.Add(j);
+            Func<int, int, int> myMax = (x,y) => { 
+                                                  int temp = ( x > y)? x : y; 
+                                                    return temp;
+                                                 };
+            Func<int, int, int> myMin = (x,y) => { 
+                                                  int temp = ( x < y)? x : y; 
+                                                    return temp;
+                                                 };
             int max, min;
                 foreach (char nutrient in dietPlan) {
                     switch(nutrient) {
                         case 'P':
-                            max = FindMax(protein, indices);
-                            indices = FindRequiredIndices(protein, indices, max);
+                            max = FindMinMax(protein, indices, myMax);
+                            indices = FindRequiredIndices(protein, indices, max).ToList();
                             break;
                         case 'p':
-                            min = FindMin(protein, indices);
-                            indices = FindRequiredIndices(protein, indices, min);
+                            min = FindMinMax(protein, indices, myMin);
+                            indices = FindRequiredIndices(protein, indices, min).ToList();
                             break;
                         case 'C':
-                            max = FindMax(carbs, indices);
-                            indices = FindRequiredIndices(carbs, indices, max);
+                            max = FindMinMax(carbs, indices, myMax);
+                            indices = FindRequiredIndices(carbs, indices, max).ToList();
                             break;
                         case 'c':
-                            min = FindMin(carbs, indices);
-                            indices = FindRequiredIndices(carbs, indices, min);
+                            min = FindMinMax(carbs, indices, myMin);
+                            indices = FindRequiredIndices(carbs, indices, min).ToList();
                             break;
                         case 'F':
-                            max = FindMax(fat, indices);
-                            indices = FindRequiredIndices(fat, indices, max);
+                            max = FindMinMax(fat, indices, myMax);
+                            indices = FindRequiredIndices(fat, indices, max).ToList();
                             break;
                         case 'f':
-                            min = FindMin(fat, indices);
-                            indices = FindRequiredIndices(fat, indices, min);
+                            min = FindMinMax(fat, indices, myMin);
+                            indices = FindRequiredIndices(fat, indices, min).ToList();
                             break;
                         case 'T':
-                            max = FindMax(calories, indices);
-                            indices = FindRequiredIndices(calories, indices, max);
+                            max = FindMinMax(calories, indices, myMax);
+                            indices = FindRequiredIndices(calories, indices, max).ToList();
                             break;
                         case 't':
-                            min = FindMin(calories, indices);
-                            indices = FindRequiredIndices(calories, indices, min);
+                            min = FindMinMax(calories, indices, myMin);
+                            indices = FindRequiredIndices(calories, indices, min).ToList();
                             break;
                     }
                 }
             return indices[0];
         }
 
-         public static List<int> FindRequiredIndices(int[] arr, List<int> indicesArg, int element) {
-            List<int> indices = new List<int>();
+         public static IEnumerable<int> FindRequiredIndices(int[] arr, List<int> indicesArg, int element) {
             foreach (int i in indicesArg) {
-                if (arr[i] == element) indices.Add(i);
+                if (arr[i] == element) yield return i;
             }
-            return indices;
         }
-
-        public static int FindMax(int[] arr, List<int> indices) {
-            if (indices.Count == 1) return arr[indices[0]];
-            int max = arr[indices[0]];
-            for (int i = 1; i < indices.Count; i++) {
-                if (arr[indices[i]] > max) max = arr[indices[i]];
+        public static int FindMinMax(int[] arr, List<int> indices, Func<int,int,int> operation){
+            if(indices.Count == 1) return arr[indices[0]];
+            int element = arr[indices[0]];
+            for(int i = 1; i < indices.Count; i++){
+                element = operation(arr[indices[i]], element);
             }
-            return max;
-        }
-        public static int FindMin(int[] arr, List<int> indices) {
-            if (indices.Count == 1) return arr[indices[0]];
-            int min = arr[indices[0]];
-            for (int i = 1; i < indices.Count; i++) {
-                if (arr[indices[i]] < min) min = arr[indices[i]];
-            }
-            return min;
+            return element;
         }
     }
 }
